@@ -1,3 +1,4 @@
+import { registerRoutes } from './routes/index';
 import { alphaNumericNanoid } from './lib/nanoid/index';
 import fastify from 'fastify';
 import { ZodTypeProvider } from 'fastify-type-provider-zod';
@@ -47,6 +48,8 @@ export const main = async () => {
 		await server.register<FastifyCookieOptions>(cookie, {
 			secret: cookieSecret,
 		});
+
+		await server.register(registerRoutes);
 
 		await server.ready();
 		return server;
